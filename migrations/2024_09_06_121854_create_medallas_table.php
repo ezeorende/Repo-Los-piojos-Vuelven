@@ -12,15 +12,12 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    { //cree tabla deportista
-        //$table->foreignId('pais')->references('id')->on('pais'); // Foreign key
-
-        Schema::create('deportistas', function (Blueprint $table) {
+    {
+        Schema::create('medallas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->foreignId('pais')->references('id')->on('pais'); // Foreign key
+            $table->foreignId('evento_id')->references('id')->on('evento_deportivos');
+            $table->enum('tipo', ['oro', 'plata', 'bronce']);
             $table->timestamps();
-
 
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deportistas');
+        Schema::dropIfExists('medallas');
     }
 };
